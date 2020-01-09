@@ -1,0 +1,18 @@
+galaxy_info:
+  author: Naoya Yamamoto (naoyayamamoto)
+  description: An ansible role to install and configure the AWS CloudWatch Logs for EC2
+  company:
+  license: "license (BSD, MIT)"
+  min_ansible_version: 2.4
+  platforms:
+    - name: Amazon
+      versions:
+      - 2
+  galaxy_tags:
+    - aws
+    - awslogs
+    - amazonlinux2
+    - ec2
+    - logging
+    - logs
+dependencies: []
