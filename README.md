@@ -1,6 +1,6 @@
 # **Ansible Role: AWSLogsEC2**
 
-[![Build Status](https://travis-ci.org/naoyayamamoto/ansible-role-awslogs-ec2.svg?branch=master)](https://travis-ci.org/thiagomgo/ansible-role-awslogs) [![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-awslogs--ec2-blue.svg)](https://galaxy.ansible.com/naoyayamamoto/awslogs-ec2)
+[![Build Status](https://travis-ci.org/naoyayamamoto/ansible-role-awslogs-ec2.svg?branch=master)](https://travis-ci.org/naoyayamamoto/ansible-role-awslogs-ec2) [![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-awslogs--ec2-blue.svg)](https://galaxy.ansible.com/naoyayamamoto/awslogs-ec2)
 
 This role installs and configures the AWS CloudWatch Logs Agent.
 
