@@ -10,5 +10,5 @@ awslogs_logs:
 ## Proxy related configuration variables
 awslogs_enable_proxy: false
 awslogs_http_proxy: http://user:pass@proxy.host:80/
-awslogs_https_proxy: '{{ awslogs_http_proxy}}'
+awslogs_https_proxy: '{{ awslogs_http_proxy }}'
 awslogs_noproxy: 127.0.0.1

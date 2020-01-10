@@ -61,7 +61,7 @@ None
       stream_name: "{instance_id}"
 
   roles:
-    - ansible-role-awslogs-ec2
+    - naoyayamamoto.awslogs_ec2
 
 ```
 
