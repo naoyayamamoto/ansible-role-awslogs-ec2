@@ -1,16 +1,14 @@
-# **Ansible Role: AWSLogs**
+# **Ansible Role: AWSLogsEC2**
 
-[![Build Status](https://travis-ci.org/thiagomgo/ansible-role-awslogs.svg?branch=master)](https://travis-ci.org/thiagomgo/ansible-role-awslogs) [![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-awslogs-blue.svg)](https://galaxy.ansible.com/thiagomgo/awslogs/)
+[![Build Status](https://travis-ci.org/naoyayamamoto/ansible-role-awslogs-ec2.svg?branch=master)](https://travis-ci.org/thiagomgo/ansible-role-awslogs) [![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-awslogs--ec2-blue.svg)](https://galaxy.ansible.com/naoyayamamoto/awslogs-ec2)
 
 This role installs and configures the AWS CloudWatch Logs Agent.
 
 ## Requirements
 
-This role only requires Ansible version 1.9+ and EC2_FACTS module.
+This role only requires Ansible version 2.4+ and EC2_FACTS module.
 
 ## Role Variables
-
-This role uses one variable, `awslogs_logs`, which is a dictionary comprised of the following items:
 
 ```yaml
 
@@ -27,8 +25,6 @@ In addition, there are three variables that are not used by default:
 
 ```yaml
 awslogs_region: eu-west-1            # Overrides the local region for log shipping
-awslogs_access_key_id: XXX           # AWS key ID, used instead of IAM roles
-awslogs_secret_access_key: XXX       # AWS secret key, used instead of IAM roles
 ```
 
 If your instance is behind an HTTP or HTTP proxy, you can configure it with the
@@ -55,27 +51,18 @@ None
 
   vars:
     awslogs_logs:
-      - file: /var/log/syslog
-        format: "%b %d %H:%M:%S"
-        time_zone: "LOCAL"
-        initial_position: "end_of_file"
-        group_name: syslog
-
-      - file: /var/log/boot.log
-        time_zone: "UTC"
-        initial_position: "start_of_file"
-        group_name: boot
+    - file: /var/log/messages
+      format: "%b %d %H:%M:%S"
+      time_zone: "LOCAL"
+      initial_position: "start_of_file"
+      group_name: /var/log/messages
+      stream_name: "{instance_id}"
 
   roles:
-    - ansible-role-awslogs
+    - ansible-role-awslogs-ec2
 
 ```
 
 ## License
 
 MIT / BSD
-
-## Author Information
-
-Thiago Gomes
-- thiago.mgomes [at] gmail.com
