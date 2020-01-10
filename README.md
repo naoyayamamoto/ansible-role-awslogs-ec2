@@ -13,12 +13,12 @@ This role only requires Ansible version 2.4+ and EC2_FACTS module.
 ```yaml
 
 awslogs_logs:
-  - file: /var/log/syslog            # The path to the log file you want to ship (required)
-    format: "%b %d %H:%M:%S"         # The date and time format of the log file
-    time_zone: "LOCAL"               # Timezone, can either be LOCAL or UTC
-    initial_position: "end_of_file"  # Where log shipping should start from
-    group_name: syslog               # The Cloudwatch Logs group name (required)
-    stream_name: "{instance_id}"     # You can use a literal string and/or predefined variables ({instance_id}, {hostname}, {ip_address})
+  - file:  /var/log/messages          # The path to the log file you want to ship (required)
+    format: "%b %d %H:%M:%S"          # The date and time format of the log file
+    time_zone: "LOCAL"                # Timezone, can either be LOCAL or UTC
+    initial_position: "start_of_file" # Where log shipping should start from
+    group_name: /var/log/messages     # The Cloudwatch Logs group name (required)
+    stream_name: "{instance_id}"      # You can use a literal string and/or predefined variables ({instance_id}, {hostname}, {ip_address})
 ```
 
 In addition, there are three variables that are not used by default:
@@ -31,6 +31,7 @@ If your instance is behind an HTTP or HTTP proxy, you can configure it with the
 following variables:
 
 ```yaml
+awslogs_enable_proxy: true
 awslogs_http_proxy: http://your.proxy:80/
 awslogs_https_proxy: http://your.https.proxy:80/
 awslogs_noproxy: 169.254.169.254
@@ -50,6 +51,7 @@ None
 - hosts: all
 
   vars:
+    awslogs_region: eu-west-1
     awslogs_logs:
     - file: /var/log/messages
       format: "%b %d %H:%M:%S"

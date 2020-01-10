@@ -1,5 +1,6 @@
 galaxy_info:
   author: Naoya Yamamoto (naoyayamamoto)
+  role_name: awslogs-ec2
   description: An ansible role to install and configure the AWS CloudWatch Logs for EC2
   company:
   license: "license (BSD, MIT)"

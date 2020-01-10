@@ -6,11 +6,6 @@ env:
   - DOCKER_COMPOSE_VERSION: 1.8.0
 
 before_install:
-    # Use actual Ansible Galaxy role name for the project directory.
-  - cd ../
-  - mv ansible-role-awslogs-ec2 awslogs-ec2
-  - cd awslogs-ec2
-
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
