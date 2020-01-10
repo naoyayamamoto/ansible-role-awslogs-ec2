@@ -18,13 +18,13 @@
 # --- AGENT COMMANDS ---
 # To check or change the running status of the CloudWatch Logs Agent, use the following:
 #
-# To check running status: /etc/init.d/awslogs status
-# To stop the agent: /etc/init.d/awslogs stop
-# To start the agent: /etc/init.d/awslogs start
+# To check running status: service awslogs status
+# To stop the agent: service awslogs stop
+# To start the agent: service awslogs start
+# To start the agent on server startup: chkconfig awslogs on
 #
 # --- AGENT LOG OUTPUT ---
 # You can find logs for the agent in /var/log/awslogs.log
-# You can find logs for the agent script in /var/log/awslogs-agent-setup.log
 #
 
 # ------------------------------------------
@@ -34,7 +34,7 @@
 [general]
 # Path to the CloudWatch Logs agent's state file. The agent uses this file to maintain
 # client side state across its executions.
-state_file = /var/awslogs/state/agent-state
+state_file = /var/lib/awslogs/agent-state
 
 ## Each log file is defined in its own section. The section name doesn't
 ## matter as long as its unique within this file.
@@ -57,15 +57,15 @@ state_file = /var/awslogs/state/agent-state
 #
 ## A batch is buffered for buffer-duration amount of time or 32KB of log events.
 ## Defaults to 5000 ms and its minimum value is 5000 ms.
-buffer_duration = 5000
-
+#buffer_duration = 5000
+#
 # Use 'end_of_file' to start reading from the end of the file.
 # Use 'start_of_file' to start reading from the beginning of the file.
 #initial_position = start_of_file
 #
 ## Encoding of file
-encoding = utf-8 # Other supported encodings include: ascii, latin-1
-
+#encoding = utf-8 # Other supported encodings include: ascii, latin-1
+#
 #
 #
 # Following table documents the detailed datetime format specification:
@@ -115,7 +115,6 @@ encoding = utf-8 # Other supported encodings include: ascii, latin-1
 # ----------------------------------------------------------------------------------------------------------------------
 #  %c           Locale's appropriate date and time representation.                                      Tue Aug 16 21:30:00 1988 (en_US)
 # ----------------------------------------------------------------------------------------------------------------------
-
 {% for log in awslogs_logs %}
 [{{ log.file }}]
 {% if log.time_zone is defined %}

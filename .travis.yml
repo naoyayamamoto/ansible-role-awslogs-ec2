@@ -1,49 +1,27 @@
 ---
-dist: trusty
-sudo: required
+services:
+  - docker
 
-language: python
-python: "2.7"
+env:
+  - DOCKER_COMPOSE_VERSION: 1.8.0
+
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - docker-compose up -d
 
 branches:
   only:
     - master
 
-# Install ansible
-addons:
-  apt:
-    packages:
-    - python-pip
-
-env:
-  - ANSIBLE_VERSION=latest
-  - ANSIBLE_VERSION=2.4.0.0
-
 install:
-  # Install ansible
-  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install --no-binary ansible ansible; else pip install --no-binary ansible ansible==$ANSIBLE_VERSION; fi
-  - pip install ansible
-
-  # Check ansible version
-  - ansible --version
-
   # Create ansible.cfg with correct roles_path
-  - echo -e 'localhost  ansible_connection=local' > tests/inventory
   - echo -e '[defaults]\nroles_path = ../\nhostfile = ./tests/inventory' > ansible.cfg
 
 script:
-  # Basic role syntax check
-  - ansible-playbook --sudo tests/test.yml -i tests/inventory --syntax-check
-
-  # Run the role/playbook with ansible-playbook.
-  #- ansible-playbook --sudo tests/test.yml -vvvv
-
-  # Run the role/playbook again, checking to make sure it's idempotent
-  #- >
-  #    ansible-playbook --sudo tests/test.yml
-  #    | grep -q 'changed=0.*failed=0'
-  #    && (echo 'Idempotence test: pass' && exit 0)
-  #    || (echo 'Idempotence test: fail' && exit 1)
+  - docker-compose exec amzn ansible-playbook tests/test.yml -i tests/inventory
 
 notifications:
   email: false

@@ -7,3 +7,4 @@ services:
       - SYS_ADMIN
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - ./:/ansible-role-awslogs-ec2:ro

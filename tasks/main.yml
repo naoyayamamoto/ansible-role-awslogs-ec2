@@ -1,11 +1,11 @@
 ---
 
-# - include: conf.yml
-#   tags:
-#     - configure
-#     - awslogs
-
 - include: install.yml
   tags:
     - install
+    - awslogs
+
+- include: conf.yml
+  tags:
+    - configure
     - awslogs
