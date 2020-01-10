@@ -5,9 +5,9 @@ galaxy_info:
   license: "license (BSD, MIT)"
   min_ansible_version: 2.4
   platforms:
-    - name: Amazon
+    - name: "Amazon Linux 2"
       versions:
-      - 2
+      - any
   galaxy_tags:
     - aws
     - awslogs
